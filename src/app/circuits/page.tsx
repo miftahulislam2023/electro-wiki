@@ -146,7 +146,7 @@ export default function CircuitsPage() {
                     </div>
                 </div>
                 <h1 className="text-4xl font-bold tracking-tight mb-4">
-                    Electronic Circuits
+                    Circuits
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                     Discover circuit designs and configurations for various applications.

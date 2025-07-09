@@ -89,7 +89,7 @@ export default function ComponentsPage() {
                     </div>
                 </div>
                 <h1 className="text-4xl font-bold tracking-tight mb-4">
-                    Electronic Components
+                    Components
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                     Explore the building blocks of electronic circuits. Click on any component

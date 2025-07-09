@@ -146,7 +146,7 @@ export default function ConceptsPage() {
                     </div>
                 </div>
                 <h1 className="text-4xl font-bold tracking-tight mb-4">
-                    Electronic Concepts
+                    Concepts
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                     Master the fundamental principles that govern electronic circuits and systems.
