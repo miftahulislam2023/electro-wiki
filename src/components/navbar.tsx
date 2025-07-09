@@ -10,7 +10,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Settings, User, Zap, Cpu, Lightbulb } from "lucide-react";
+import { Settings, User, Zap, Cpu, Lightbulb, Play } from "lucide-react";
 import Link from "next/link";
 
 export default async function Navbar() {
@@ -53,6 +53,12 @@ export default async function Navbar() {
                         <Link href="/concepts" className="gap-2">
                             <Lightbulb className="h-4 w-4" />
                             Concepts
+                        </Link>
+                    </Button>
+                    <Button variant="ghost" size="sm" asChild>
+                        <Link href="/simulate" className="gap-2">
+                            <Play className="h-4 w-4" />
+                            Simulate
                         </Link>
                     </Button>
                 </div>
