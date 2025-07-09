@@ -1,220 +1,143 @@
-import { Lightbulb, Zap, Gauge, Atom, Calculator, Waves } from "lucide-react";
+import { Lightbulb, Zap, Atom, Calculator, Waves } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
 export default function ConceptsPage() {
-    const conceptCategories = [
+    const concepts = [
         {
-            title: "Fundamental Concepts",
+            id: "electric-charge",
+            name: "Electric Charge",
+            description: "The fundamental property of matter that causes electrical phenomena",
+            category: "Fundamental Concepts",
             icon: <Atom className="h-6 w-6" />,
-            description: "Core principles of electricity and electronics",
-            concepts: [
-                {
-                    name: "Electric Charge",
-                    description: "The fundamental property of matter that causes electrical phenomena",
-                    details: [
-                        "Positive and negative charges - Like charges repel, unlike attract",
-                        "Coulomb&apos;s Law - Force between charges inversely proportional to distance squared",
-                        "Conservation of charge - Total charge in isolated system remains constant",
-                        "Elementary charge (e) = 1.602 × 10⁻¹⁹ coulombs"
-                    ],
-                    formulas: ["F = k(q₁q₂)/r²", "Q = ne"]
-                },
-                {
-                    name: "Electric Current",
-                    description: "The flow of electric charge through a conductor",
-                    details: [
-                        "Conventional current - Positive charge flow (opposite to electron flow)",
-                        "Direct Current (DC) - Constant direction and magnitude",
-                        "Alternating Current (AC) - Periodically changes direction",
-                        "Current density - Current per unit cross-sectional area"
-                    ],
-                    formulas: ["I = Q/t", "I = nAve", "J = I/A"]
-                },
-                {
-                    name: "Voltage (Potential Difference)",
-                    description: "The electrical potential energy difference per unit charge",
-                    details: [
-                        "Work done to move charge between two points",
-                        "Measured in volts (V) - joules per coulomb",
-                        "EMF (Electromotive Force) - Voltage source in circuit",
-                        "Ground reference - Zero potential reference point"
-                    ],
-                    formulas: ["V = W/Q", "V = E·d", "P = VI"]
-                },
-                {
-                    name: "Resistance",
-                    description: "Opposition to the flow of electric current",
-                    details: [
-                        "Ohmic materials - Linear relationship between V and I",
-                        "Temperature coefficient - Resistance change with temperature",
-                        "Resistivity - Material property affecting resistance",
-                        "Conductance - Reciprocal of resistance (G = 1/R)"
-                    ],
-                    formulas: ["R = V/I", "R = ρl/A", "G = 1/R"]
-                }
-            ]
+            difficulty: "Beginner",
+            keyPoints: ["Positive and negative charges", "Coulomb's Law", "Conservation of charge"],
+            applications: ["Static electricity", "Capacitor operation", "Ion flow in solutions"]
         },
         {
-            title: "Energy and Power",
+            id: "electric-current",
+            name: "Electric Current",
+            description: "The flow of electric charge through a conductor",
+            category: "Fundamental Concepts",
+            icon: <Atom className="h-6 w-6" />,
+            difficulty: "Beginner",
+            keyPoints: ["Conventional vs electron flow", "DC and AC current", "Current density"],
+            applications: ["Circuit analysis", "Motor operation", "Electronic devices"]
+        },
+        {
+            id: "voltage",
+            name: "Voltage (Potential Difference)",
+            description: "The electrical potential energy difference per unit charge",
+            category: "Fundamental Concepts",
+            icon: <Atom className="h-6 w-6" />,
+            difficulty: "Beginner",
+            keyPoints: ["Work done per charge", "EMF sources", "Ground reference"],
+            applications: ["Battery operation", "Power transmission", "Signal processing"]
+        },
+        {
+            id: "resistance",
+            name: "Resistance",
+            description: "Opposition to the flow of electric current",
+            category: "Fundamental Concepts",
+            icon: <Atom className="h-6 w-6" />,
+            difficulty: "Beginner",
+            keyPoints: ["Ohm's Law", "Material resistivity", "Temperature effects"],
+            applications: ["Current limiting", "Voltage division", "Heating elements"]
+        },
+        {
+            id: "electrical-power",
+            name: "Electrical Power",
+            description: "Rate of energy conversion or consumption",
+            category: "Energy and Power",
             icon: <Zap className="h-6 w-6" />,
-            description: "Energy storage, transfer, and power dissipation",
-            concepts: [
-                {
-                    name: "Electrical Power",
-                    description: "Rate of energy conversion or consumption",
-                    details: [
-                        "Power dissipation in resistors - Converts electrical to heat energy",
-                        "Power factor - Relationship between real and apparent power (AC)",
-                        "Maximum power transfer - Load resistance equals source resistance",
-                        "Efficiency - Ratio of useful output power to input power"
-                    ],
-                    formulas: ["P = VI", "P = I²R", "P = V²/R", "η = Pout/Pin"]
-                },
-                {
-                    name: "Energy Storage",
-                    description: "Storing electrical energy in electric and magnetic fields",
-                    details: [
-                        "Capacitor energy - Stored in electric field between plates",
-                        "Inductor energy - Stored in magnetic field around conductor",
-                        "Energy density - Energy per unit volume",
-                        "Battery energy - Chemical to electrical energy conversion"
-                    ],
-                    formulas: ["Ec = ½CV²", "EL = ½LI²", "u = ½εE²"]
-                }
-            ]
+            difficulty: "Intermediate",
+            keyPoints: ["Power formulas", "Efficiency concepts", "Power factor"],
+            applications: ["Power rating", "Energy billing", "Motor sizing"]
         },
         {
-            title: "AC Circuit Analysis",
+            id: "energy-storage",
+            name: "Energy Storage",
+            description: "Storing electrical energy in electric and magnetic fields",
+            category: "Energy and Power",
+            icon: <Zap className="h-6 w-6" />,
+            difficulty: "Intermediate",
+            keyPoints: ["Capacitor energy", "Inductor energy", "Energy density"],
+            applications: ["Power supplies", "Pulse circuits", "Energy harvesting"]
+        },
+        {
+            id: "ac-waveforms",
+            name: "AC Waveforms",
+            description: "Mathematical representation of alternating current signals",
+            category: "AC Circuit Analysis",
             icon: <Waves className="h-6 w-6" />,
-            description: "Alternating current circuit behavior and analysis",
-            concepts: [
-                {
-                    name: "Sinusoidal Waveforms",
-                    description: "Mathematical representation of AC signals",
-                    details: [
-                        "Amplitude - Peak value of the waveform",
-                        "Frequency - Number of cycles per second (Hz)",
-                        "Phase - Angular displacement between waveforms",
-                        "RMS value - Effective value for power calculations"
-                    ],
-                    formulas: ["v(t) = Vm sin(ωt + φ)", "Vrms = Vm/√2", "f = 1/T"]
-                },
-                {
-                    name: "Impedance",
-                    description: "AC opposition to current flow (magnitude and phase)",
-                    details: [
-                        "Resistance - Real component, no phase shift",
-                        "Reactance - Imaginary component, 90° phase shift",
-                        "Capacitive reactance - Decreases with frequency",
-                        "Inductive reactance - Increases with frequency"
-                    ],
-                    formulas: ["Z = R + jX", "XL = ωL", "XC = 1/(ωC)"]
-                },
-                {
-                    name: "Resonance",
-                    description: "Condition where reactive components cancel each other",
-                    details: [
-                        "Series resonance - Minimum impedance, maximum current",
-                        "Parallel resonance - Maximum impedance, minimum current",
-                        "Quality factor (Q) - Measure of resonance sharpness",
-                        "Bandwidth - Frequency range of effective operation"
-                    ],
-                    formulas: ["fr = 1/(2π√LC)", "Q = ωL/R", "BW = fr/Q"]
-                }
-            ]
+            difficulty: "Intermediate",
+            keyPoints: ["Sinusoidal functions", "RMS values", "Phase relationships"],
+            applications: ["Power systems", "Signal processing", "Audio systems"]
         },
         {
-            title: "Semiconductor Physics",
+            id: "impedance",
+            name: "Impedance",
+            description: "Opposition to alternating current in complex circuits",
+            category: "AC Circuit Analysis",
+            icon: <Waves className="h-6 w-6" />,
+            difficulty: "Advanced",
+            keyPoints: ["Complex numbers", "Reactance", "Phasor analysis"],
+            applications: ["Filter design", "Matching networks", "Transmission lines"]
+        },
+        {
+            id: "resonance",
+            name: "Resonance",
+            description: "Frequency-dependent behavior in LC circuits",
+            category: "AC Circuit Analysis",
+            icon: <Waves className="h-6 w-6" />,
+            difficulty: "Advanced",
+            keyPoints: ["Natural frequency", "Quality factor", "Bandwidth"],
+            applications: ["Tuned circuits", "Filters", "Oscillators"]
+        },
+        {
+            id: "electromagnetic-fields",
+            name: "Electromagnetic Fields",
+            description: "Electric and magnetic field interactions",
+            category: "Advanced Concepts",
             icon: <Calculator className="h-6 w-6" />,
-            description: "Principles of semiconductor devices and materials",
-            concepts: [
-                {
-                    name: "PN Junction",
-                    description: "Interface between P-type and N-type semiconductor materials",
-                    details: [
-                        "Depletion region - Area depleted of mobile charge carriers",
-                        "Built-in potential - Voltage across unbiased junction",
-                        "Forward bias - Reduces depletion width, allows current flow",
-                        "Reverse bias - Increases depletion width, blocks current flow"
-                    ],
-                    formulas: ["I = Is(e^(qV/kT) - 1)", "Vbi = (kT/q)ln(NaNd/ni²)"]
-                },
-                {
-                    name: "Transistor Operation",
-                    description: "Current control and amplification in transistor devices",
-                    details: [
-                        "BJT operation - Current-controlled current source",
-                        "FET operation - Voltage-controlled current source",
-                        "Amplification regions - Active, saturation, cutoff",
-                        "Small-signal models - Linear analysis for small variations"
-                    ],
-                    formulas: ["IC = βIB", "gm = IC/VT", "ro = VA/IC"]
-                }
-            ]
+            difficulty: "Advanced",
+            keyPoints: ["Maxwell's equations", "Wave propagation", "Field coupling"],
+            applications: ["Antenna design", "EMI analysis", "Transformer operation"]
         },
         {
-            title: "Digital Logic",
-            icon: <Gauge className="h-6 w-6" />,
-            description: "Binary systems and digital signal processing",
-            concepts: [
-                {
-                    name: "Boolean Algebra",
-                    description: "Mathematical system for digital logic operations",
-                    details: [
-                        "Logic variables - Binary values (0 and 1)",
-                        "Basic operations - AND, OR, NOT",
-                        "De Morgan&apos;s laws - Relationship between AND/OR operations",
-                        "Logic minimization - Simplifying Boolean expressions"
-                    ],
-                    formulas: ["A·B = A AND B", "A+B = A OR B", "Ā = NOT A"]
-                },
-                {
-                    name: "Number Systems",
-                    description: "Different bases for representing digital information",
-                    details: [
-                        "Binary system - Base 2 (0, 1)",
-                        "Decimal system - Base 10 (0-9)",
-                        "Hexadecimal system - Base 16 (0-9, A-F)",
-                        "Two&apos;s complement - Signed binary representation"
-                    ],
-                    formulas: ["(1010)₂ = (10)₁₀", "(FF)₁₆ = (255)₁₀"]
-                }
-            ]
+            id: "semiconductor-physics",
+            name: "Semiconductor Physics",
+            description: "Behavior of electrons and holes in semiconductor materials",
+            category: "Advanced Concepts",
+            icon: <Calculator className="h-6 w-6" />,
+            difficulty: "Advanced",
+            keyPoints: ["PN junctions", "Doping", "Band theory"],
+            applications: ["Diode operation", "Transistor function", "Solar cells"]
         },
         {
-            title: "Signal Processing",
-            icon: <Waves className="h-6 w-6" />,
-            description: "Analysis and manipulation of electrical signals",
-            concepts: [
-                {
-                    name: "Fourier Analysis",
-                    description: "Decomposition of signals into frequency components",
-                    details: [
-                        "Fourier series - Periodic signal decomposition",
-                        "Fourier transform - Non-periodic signal analysis",
-                        "Frequency domain - Signal representation vs frequency",
-                        "Spectral analysis - Understanding signal frequency content"
-                    ],
-                    formulas: ["X(ω) = ∫x(t)e^(-jωt)dt", "x(t) = (1/2π)∫X(ω)e^(jωt)dω"]
-                },
-                {
-                    name: "Filtering",
-                    description: "Selective frequency response modification",
-                    details: [
-                        "Transfer function - Input-output relationship",
-                        "Frequency response - Magnitude and phase vs frequency",
-                        "Pole-zero analysis - Stability and response characteristics",
-                        "Filter types - Low-pass, high-pass, band-pass, band-stop"
-                    ],
-                    formulas: ["H(jω) = Vout/Vin", "|H(jω)| = magnitude response"]
-                }
-            ]
+            id: "feedback-systems",
+            name: "Feedback Systems",
+            description: "Control systems using output to modify input",
+            category: "Advanced Concepts",
+            icon: <Calculator className="h-6 w-6" />,
+            difficulty: "Advanced",
+            keyPoints: ["Negative feedback", "Stability", "Transfer functions"],
+            applications: ["Voltage regulators", "Amplifier design", "Control systems"]
         }
     ];
 
+    const getDifficultyColor = (difficulty: string) => {
+        switch (difficulty) {
+            case "Beginner": return "bg-green-100 text-green-800";
+            case "Intermediate": return "bg-yellow-100 text-yellow-800";
+            case "Advanced": return "bg-red-100 text-red-800";
+            default: return "bg-gray-100 text-gray-800";
+        }
+    };
+
     return (
-        <div className="container mx-auto px-20 py-8">
+        <div className="container mx-auto px-4 py-8">
             {/* Header */}
             <div className="text-center mb-12">
                 <div className="flex justify-center mb-4">
@@ -223,114 +146,145 @@ export default function ConceptsPage() {
                     </div>
                 </div>
                 <h1 className="text-4xl font-bold tracking-tight mb-4">
-                    Electrical & Electronics Concepts
+                    Electronic Concepts
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                    Master the fundamental theories and principles that govern electrical and electronic systems.
-                    From basic circuit laws to advanced signal processing concepts.
+                    Master the fundamental principles that govern electronic circuits and systems.
+                    Click on any concept to dive deeper into the theory and applications.
                 </p>
             </div>
 
-            {/* Concept Categories */}
-            <div className="space-y-12">
-                {conceptCategories.map((category, categoryIndex) => (
-                    <div key={categoryIndex} className="bg-card rounded-lg border p-6">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="rounded-full bg-primary/10 p-2">
-                                {category.icon}
-                            </div>
-                            <div>
-                                <h2 className="text-2xl font-bold">{category.title}</h2>
-                                <p className="text-muted-foreground">{category.description}</p>
-                            </div>
-                        </div>
-
-                        <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
-                            {category.concepts.map((concept, conceptIndex) => (
-                                <div key={conceptIndex} className="bg-muted/20 rounded-lg p-6 border">
-                                    <h3 className="text-lg font-semibold mb-2">{concept.name}</h3>
-                                    <p className="text-muted-foreground mb-4">{concept.description}</p>
-
-                                    <div className="mb-4">
-                                        <h4 className="font-medium mb-2">Key Points:</h4>
-                                        <ul className="space-y-1 text-sm">
-                                            {concept.details.map((detail, detailIndex) => (
-                                                <li key={detailIndex} className="flex items-start gap-2">
-                                                    <div className="rounded-full bg-primary/20 w-1.5 h-1.5 mt-2 flex-shrink-0" />
-                                                    <span>{detail}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-
-                                    {concept.formulas && (
-                                        <div>
-                                            <h4 className="font-medium mb-2">Key Formulas:</h4>
-                                            <div className="space-y-1">
-                                                {concept.formulas.map((formula, formulaIndex) => (
-                                                    <div
-                                                        key={formulaIndex}
-                                                        className="bg-muted/40 border rounded px-3 py-1 font-mono text-sm"
-                                                    >
-                                                        {formula}
-                                                    </div>
-                                                ))}
-                                            </div>
+            {/* Concepts Grid */}
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-12">
+                {concepts.map((concept) => (
+                    <Link
+                        key={concept.id}
+                        href={`/concepts/${concept.id}`}
+                        className="group block"
+                    >
+                        <Card className="h-full hover:shadow-lg transition-shadow duration-200 cursor-pointer border-2 group-hover:border-primary/50">
+                            <CardHeader className="pb-4">
+                                <div className="flex items-center justify-between mb-2">
+                                    <div className="flex items-center gap-3">
+                                        <div className="rounded-full bg-primary/10 p-2 group-hover:bg-primary/20 transition-colors">
+                                            {concept.icon}
                                         </div>
-                                    )}
+                                        <div className="text-xs text-muted-foreground">
+                                            {concept.category}
+                                        </div>
+                                    </div>
+                                    <span className={`text-xs px-2 py-1 rounded-full ${getDifficultyColor(concept.difficulty)}`}>
+                                        {concept.difficulty}
+                                    </span>
                                 </div>
-                            ))}
-                        </div>
-                    </div>
+                                <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                                    {concept.name}
+                                </CardTitle>
+                                <CardDescription className="text-sm">
+                                    {concept.description}
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent className="pt-0">
+                                <div className="space-y-3">
+                                    <div>
+                                        <h4 className="text-sm font-medium text-muted-foreground mb-1">Key Points</h4>
+                                        <div className="space-y-1">
+                                            {concept.keyPoints.slice(0, 2).map((point, index) => (
+                                                <p key={index} className="text-xs text-muted-foreground">
+                                                    • {point}
+                                                </p>
+                                            ))}
+                                            {concept.keyPoints.length > 2 && (
+                                                <p className="text-xs text-muted-foreground">
+                                                    +{concept.keyPoints.length - 2} more points
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 className="text-sm font-medium text-muted-foreground mb-1">Applications</h4>
+                                        <div className="flex flex-wrap gap-1">
+                                            {concept.applications.slice(0, 2).map((app, index) => (
+                                                <span
+                                                    key={index}
+                                                    className="text-xs bg-muted px-2 py-1 rounded"
+                                                >
+                                                    {app}
+                                                </span>
+                                            ))}
+                                            {concept.applications.length > 2 && (
+                                                <span className="text-xs text-muted-foreground">
+                                                    +{concept.applications.length - 2} more
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </Link>
                 ))}
             </div>
 
-            {/* Study Tips */}
-            <div className="mt-16 bg-muted/30 rounded-lg p-8">
+            {/* Learning Path */}
+            <div className="bg-muted/30 rounded-lg p-8">
                 <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold mb-4">Study Guidelines</h2>
+                    <h2 className="text-3xl font-bold mb-4">Recommended Learning Path</h2>
                     <p className="text-muted-foreground">
-                        Effective approaches to mastering electrical and electronics concepts
+                        Build your understanding progressively with these concept categories
                     </p>
                 </div>
 
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div className="bg-card rounded-lg p-4 border">
                         <div className="flex items-center gap-2 mb-3">
-                            <Calculator className="h-5 w-5 text-primary" />
-                            <h3 className="font-semibold">Mathematical Foundation</h3>
+                            <div className="rounded-full bg-green-100 text-green-800 px-2 py-1 text-xs font-medium">1</div>
+                            <h3 className="font-semibold">Fundamentals</h3>
                         </div>
                         <ul className="space-y-1 text-sm text-muted-foreground">
-                            <li>• Master complex numbers and phasors</li>
-                            <li>• Practice differential equations</li>
-                            <li>• Understand Fourier transforms</li>
-                            <li>• Learn matrix algebra for circuits</li>
+                            <li>• Electric charge</li>
+                            <li>• Current and voltage</li>
+                            <li>• Resistance and Ohm&apos;s law</li>
+                            <li>• Basic circuit laws</li>
                         </ul>
                     </div>
 
                     <div className="bg-card rounded-lg p-4 border">
                         <div className="flex items-center gap-2 mb-3">
-                            <Lightbulb className="h-5 w-5 text-primary" />
-                            <h3 className="font-semibold">Practical Application</h3>
+                            <div className="rounded-full bg-yellow-100 text-yellow-800 px-2 py-1 text-xs font-medium">2</div>
+                            <h3 className="font-semibold">Energy & Power</h3>
                         </div>
                         <ul className="space-y-1 text-sm text-muted-foreground">
-                            <li>• Build physical circuits</li>
-                            <li>• Use simulation software</li>
-                            <li>• Measure with oscilloscopes</li>
-                            <li>• Design real-world projects</li>
+                            <li>• Electrical power</li>
+                            <li>• Energy storage</li>
+                            <li>• Efficiency concepts</li>
+                            <li>• Power calculations</li>
                         </ul>
                     </div>
 
                     <div className="bg-card rounded-lg p-4 border">
                         <div className="flex items-center gap-2 mb-3">
-                            <Gauge className="h-5 w-5 text-primary" />
-                            <h3 className="font-semibold">Problem Solving</h3>
+                            <div className="rounded-full bg-blue-100 text-blue-800 px-2 py-1 text-xs font-medium">3</div>
+                            <h3 className="font-semibold">AC Analysis</h3>
                         </div>
                         <ul className="space-y-1 text-sm text-muted-foreground">
-                            <li>• Work through example problems</li>
-                            <li>• Practice different analysis methods</li>
-                            <li>• Verify results with multiple approaches</li>
-                            <li>• Understand limiting cases</li>
+                            <li>• Sinusoidal waveforms</li>
+                            <li>• Phasor analysis</li>
+                            <li>• Impedance concepts</li>
+                            <li>• Resonance phenomena</li>
+                        </ul>
+                    </div>
+
+                    <div className="bg-card rounded-lg p-4 border">
+                        <div className="flex items-center gap-2 mb-3">
+                            <div className="rounded-full bg-red-100 text-red-800 px-2 py-1 text-xs font-medium">4</div>
+                            <h3 className="font-semibold">Advanced Topics</h3>
+                        </div>
+                        <ul className="space-y-1 text-sm text-muted-foreground">
+                            <li>• Electromagnetic fields</li>
+                            <li>• Semiconductor physics</li>
+                            <li>• Feedback systems</li>
+                            <li>• Advanced analysis</li>
                         </ul>
                     </div>
                 </div>
@@ -340,12 +294,12 @@ export default function ConceptsPage() {
             <div className="flex justify-center gap-4 mt-12">
                 <Button asChild variant="outline">
                     <Link href="/components">
-                        ← Components
+                        ← Explore Components
                     </Link>
                 </Button>
                 <Button asChild variant="outline">
                     <Link href="/circuits">
-                        ← Circuits
+                        ← View Circuits
                     </Link>
                 </Button>
             </div>

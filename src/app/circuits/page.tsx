@@ -1,191 +1,143 @@
 import { Zap, Battery, Gauge, Radio, Cpu, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
 export default function CircuitsPage() {
-    const circuitCategories = [
+    const circuits = [
         {
-            title: "Basic Circuits",
+            id: "series-circuit",
+            name: "Series Circuit",
+            description: "Components connected end-to-end in a single path",
+            category: "Basic Circuits",
             icon: <Battery className="h-6 w-6" />,
-            description: "Fundamental circuit configurations and principles",
-            circuits: [
-                {
-                    name: "Series Circuit",
-                    description: "Components connected end-to-end in a single path",
-                    characteristics: [
-                        "Same current flows through all components",
-                        "Total voltage = sum of individual voltages",
-                        "Total resistance = sum of individual resistances",
-                        "If one component fails, entire circuit stops"
-                    ],
-                    applications: ["String lights", "Battery packs", "Voltage dividers"]
-                },
-                {
-                    name: "Parallel Circuit",
-                    description: "Components connected across common points",
-                    characteristics: [
-                        "Same voltage across all components",
-                        "Total current = sum of individual currents",
-                        "1/Rtotal = 1/R1 + 1/R2 + 1/R3...",
-                        "Components operate independently"
-                    ],
-                    applications: ["Household wiring", "Car headlights", "Computer circuits"]
-                },
-                {
-                    name: "Series-Parallel Circuit",
-                    description: "Combination of series and parallel connections",
-                    characteristics: [
-                        "Complex current and voltage distribution",
-                        "Requires analysis techniques (KVL, KCL)",
-                        "Most practical circuits use this configuration",
-                        "Allows for optimized design trade-offs"
-                    ],
-                    applications: ["Power distribution", "Audio systems", "Control circuits"]
-                }
-            ]
+            difficulty: "Beginner",
+            characteristics: ["Same current through all components", "Voltage divides across components"],
+            applications: ["String lights", "Battery packs", "Voltage dividers"]
         },
         {
-            title: "Analog Circuits",
+            id: "parallel-circuit",
+            name: "Parallel Circuit",
+            description: "Components connected across common points",
+            category: "Basic Circuits",
+            icon: <Battery className="h-6 w-6" />,
+            difficulty: "Beginner",
+            characteristics: ["Same voltage across all components", "Current divides through branches"],
+            applications: ["Household wiring", "Car headlights", "Computer circuits"]
+        },
+        {
+            id: "series-parallel-circuit",
+            name: "Series-Parallel Circuit",
+            description: "Combination of series and parallel connections",
+            category: "Basic Circuits",
+            icon: <Battery className="h-6 w-6" />,
+            difficulty: "Intermediate",
+            characteristics: ["Complex analysis required", "Most practical circuits"],
+            applications: ["Power distribution", "Audio systems", "Control circuits"]
+        },
+        {
+            id: "amplifier-circuits",
+            name: "Amplifier Circuits",
+            description: "Increase the amplitude of input signals",
+            category: "Analog Circuits",
             icon: <Gauge className="h-6 w-6" />,
-            description: "Circuits that process continuous analog signals",
-            circuits: [
-                {
-                    name: "Amplifier Circuits",
-                    description: "Increase the amplitude of input signals",
-                    characteristics: [
-                        "Common Emitter - High voltage gain",
-                        "Common Collector - Current gain, low output impedance",
-                        "Common Base - High frequency response",
-                        "Operational amplifier configurations"
-                    ],
-                    applications: ["Audio systems", "Sensor interfaces", "RF communication"]
-                },
-                {
-                    name: "Filter Circuits",
-                    description: "Select or reject specific frequency ranges",
-                    characteristics: [
-                        "Low-pass filters - Allow low frequencies",
-                        "High-pass filters - Allow high frequencies",
-                        "Band-pass filters - Allow specific frequency range",
-                        "Band-stop filters - Reject specific frequencies"
-                    ],
-                    applications: ["Audio crossovers", "Power supplies", "Signal processing"]
-                },
-                {
-                    name: "Oscillator Circuits",
-                    description: "Generate periodic waveforms",
-                    characteristics: [
-                        "RC oscillators - Audio frequency range",
-                        "LC oscillators - Radio frequency range",
-                        "Crystal oscillators - High precision timing",
-                        "Relaxation oscillators - Non-sinusoidal waves"
-                    ],
-                    applications: ["Clock generation", "Signal sources", "Timing circuits"]
-                }
-            ]
+            difficulty: "Intermediate",
+            characteristics: ["Common Emitter/Base/Collector", "Op-amp configurations"],
+            applications: ["Audio systems", "Sensor interfaces", "RF communication"]
         },
         {
-            title: "Digital Circuits",
+            id: "filter-circuits",
+            name: "Filter Circuits",
+            description: "Select or reject specific frequency ranges",
+            category: "Analog Circuits",
+            icon: <Gauge className="h-6 w-6" />,
+            difficulty: "Intermediate",
+            characteristics: ["Low/High/Band-pass filters", "Active and passive types"],
+            applications: ["Audio crossovers", "Power supplies", "Signal processing"]
+        },
+        {
+            id: "oscillator-circuits",
+            name: "Oscillator Circuits",
+            description: "Generate periodic waveforms",
+            category: "Analog Circuits",
+            icon: <Gauge className="h-6 w-6" />,
+            difficulty: "Advanced",
+            characteristics: ["RC/LC/Crystal oscillators", "Various waveforms"],
+            applications: ["Clock generation", "Signal sources", "Timing circuits"]
+        },
+        {
+            id: "logic-gates",
+            name: "Logic Gates",
+            description: "Basic building blocks of digital systems",
+            category: "Digital Circuits",
             icon: <Cpu className="h-6 w-6" />,
-            description: "Circuits that process discrete digital signals",
-            circuits: [
-                {
-                    name: "Logic Gates",
-                    description: "Basic building blocks of digital systems",
-                    characteristics: [
-                        "AND gate - Output high when all inputs high",
-                        "OR gate - Output high when any input high",
-                        "NOT gate - Output opposite of input",
-                        "NAND, NOR, XOR gates - Composite functions"
-                    ],
-                    applications: ["Computer processors", "Digital controllers", "Logic circuits"]
-                },
-                {
-                    name: "Flip-Flops and Latches",
-                    description: "Memory elements that store binary information",
-                    characteristics: [
-                        "SR Latch - Set-Reset memory element",
-                        "D Flip-Flop - Data storage with clock",
-                        "JK Flip-Flop - No forbidden states",
-                        "T Flip-Flop - Toggle operation"
-                    ],
-                    applications: ["Registers", "Counters", "State machines"]
-                },
-                {
-                    name: "Combinational Circuits",
-                    description: "Output depends only on current inputs",
-                    characteristics: [
-                        "Encoders - Multiple inputs to coded output",
-                        "Decoders - Coded input to multiple outputs",
-                        "Multiplexers - Select one of many inputs",
-                        "Demultiplexers - Route input to selected output"
-                    ],
-                    applications: ["Data routing", "Address decoding", "Display drivers"]
-                }
-            ]
+            difficulty: "Beginner",
+            characteristics: ["AND/OR/NOT/NAND/NOR/XOR", "Boolean logic"],
+            applications: ["Digital processors", "Logic circuits", "Computer systems"]
         },
         {
-            title: "Power Circuits",
+            id: "flip-flops",
+            name: "Flip-Flops",
+            description: "Memory elements in digital circuits",
+            category: "Digital Circuits",
+            icon: <Cpu className="h-6 w-6" />,
+            difficulty: "Intermediate",
+            characteristics: ["SR/D/JK/T flip-flops", "Clock-triggered"],
+            applications: ["Memory storage", "Counters", "State machines"]
+        },
+        {
+            id: "counters",
+            name: "Counters",
+            description: "Count digital pulses or events",
+            category: "Digital Circuits",
+            icon: <Cpu className="h-6 w-6" />,
+            difficulty: "Intermediate",
+            characteristics: ["Binary/Decade counters", "Up/Down counting"],
+            applications: ["Frequency division", "Event counting", "Digital clocks"]
+        },
+        {
+            id: "power-supplies",
+            name: "Power Supply Circuits",
+            description: "Convert and regulate electrical power",
+            category: "Power Circuits",
             icon: <Zap className="h-6 w-6" />,
-            description: "Circuits for power conversion and control",
-            circuits: [
-                {
-                    name: "Rectifier Circuits",
-                    description: "Convert AC to DC voltage",
-                    characteristics: [
-                        "Half-wave rectifier - Simple, low efficiency",
-                        "Full-wave rectifier - Better efficiency",
-                        "Bridge rectifier - No center-tapped transformer",
-                        "Voltage multiplier - Higher output voltage"
-                    ],
-                    applications: ["Power supplies", "DC motor drives", "Battery chargers"]
-                },
-                {
-                    name: "Switching Regulators",
-                    description: "Efficient voltage regulation using switching",
-                    characteristics: [
-                        "Buck converter - Step-down voltage",
-                        "Boost converter - Step-up voltage",
-                        "Buck-boost converter - Either direction",
-                        "Flyback converter - Isolated output"
-                    ],
-                    applications: ["Computer power supplies", "LED drivers", "Solar inverters"]
-                }
-            ]
+            difficulty: "Advanced",
+            characteristics: ["Linear/Switching regulators", "AC/DC conversion"],
+            applications: ["Electronic devices", "Battery chargers", "DC motors"]
         },
         {
-            title: "Communication Circuits",
+            id: "motor-drives",
+            name: "Motor Drive Circuits",
+            description: "Control electric motors",
+            category: "Power Circuits",
+            icon: <Zap className="h-6 w-6" />,
+            difficulty: "Advanced",
+            characteristics: ["PWM control", "H-bridge circuits"],
+            applications: ["Robotics", "Industrial automation", "Electric vehicles"]
+        },
+        {
+            id: "rf-circuits",
+            name: "RF Circuits",
+            description: "Radio frequency signal processing",
+            category: "RF Circuits",
             icon: <Radio className="h-6 w-6" />,
-            description: "Circuits for signal transmission and reception",
-            circuits: [
-                {
-                    name: "Modulation Circuits",
-                    description: "Encode information onto carrier signals",
-                    characteristics: [
-                        "Amplitude Modulation (AM) - Vary carrier amplitude",
-                        "Frequency Modulation (FM) - Vary carrier frequency",
-                        "Phase Modulation (PM) - Vary carrier phase",
-                        "Digital modulation - PSK, FSK, QAM"
-                    ],
-                    applications: ["Radio broadcasting", "WiFi systems", "Cellular networks"]
-                },
-                {
-                    name: "Antenna Circuits",
-                    description: "Convert electrical signals to electromagnetic waves",
-                    characteristics: [
-                        "Dipole antennas - Simple, bidirectional",
-                        "Monopole antennas - Ground plane required",
-                        "Patch antennas - Compact, directional",
-                        "Array antennas - High gain, steerable"
-                    ],
-                    applications: ["Wireless communication", "Radar systems", "Satellite links"]
-                }
-            ]
+            difficulty: "Advanced",
+            characteristics: ["High frequency effects", "Impedance matching"],
+            applications: ["Wireless communication", "Radar systems", "Broadcasting"]
         }
     ];
 
+    const getDifficultyColor = (difficulty: string) => {
+        switch (difficulty) {
+            case "Beginner": return "bg-green-100 text-green-800";
+            case "Intermediate": return "bg-yellow-100 text-yellow-800";
+            case "Advanced": return "bg-red-100 text-red-800";
+            default: return "bg-gray-100 text-gray-800";
+        }
+    };
+
     return (
-        <div className="container mx-auto px-20 py-8">
+        <div className="container mx-auto px-4 py-8">
             {/* Header */}
             <div className="text-center mb-12">
                 <div className="flex justify-center mb-4">
@@ -198,64 +150,79 @@ export default function CircuitsPage() {
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                     Discover circuit designs and configurations for various applications.
-                    From basic series-parallel circuits to complex digital and communication systems.
+                    Click on any circuit to learn more about its design and analysis.
                 </p>
             </div>
 
-            {/* Circuit Categories */}
-            <div className="space-y-12">
-                {circuitCategories.map((category, categoryIndex) => (
-                    <div key={categoryIndex} className="bg-card rounded-lg border p-6">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="rounded-full bg-primary/10 p-2">
-                                {category.icon}
-                            </div>
-                            <div>
-                                <h2 className="text-2xl font-bold">{category.title}</h2>
-                                <p className="text-muted-foreground">{category.description}</p>
-                            </div>
-                        </div>
-
-                        <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
-                            {category.circuits.map((circuit, circuitIndex) => (
-                                <div key={circuitIndex} className="bg-muted/20 rounded-lg p-6 border">
-                                    <h3 className="text-lg font-semibold mb-2">{circuit.name}</h3>
-                                    <p className="text-muted-foreground mb-4">{circuit.description}</p>
-
-                                    <div className="mb-4">
-                                        <h4 className="font-medium mb-2">Key Characteristics:</h4>
-                                        <ul className="space-y-1 text-sm">
-                                            {circuit.characteristics.map((char, charIndex) => (
-                                                <li key={charIndex} className="flex items-start gap-2">
-                                                    <div className="rounded-full bg-primary/20 w-1.5 h-1.5 mt-2 flex-shrink-0" />
-                                                    <span>{char}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
+            {/* Circuits Grid */}
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-12">
+                {circuits.map((circuit) => (
+                    <Link
+                        key={circuit.id}
+                        href={`/circuits/${circuit.id}`}
+                        className="group block"
+                    >
+                        <Card className="h-full hover:shadow-lg transition-shadow duration-200 cursor-pointer border-2 group-hover:border-primary/50">
+                            <CardHeader className="pb-4">
+                                <div className="flex items-center justify-between mb-2">
+                                    <div className="flex items-center gap-3">
+                                        <div className="rounded-full bg-primary/10 p-2 group-hover:bg-primary/20 transition-colors">
+                                            {circuit.icon}
+                                        </div>
+                                        <div className="text-xs text-muted-foreground">
+                                            {circuit.category}
+                                        </div>
                                     </div>
-
+                                    <span className={`text-xs px-2 py-1 rounded-full ${getDifficultyColor(circuit.difficulty)}`}>
+                                        {circuit.difficulty}
+                                    </span>
+                                </div>
+                                <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                                    {circuit.name}
+                                </CardTitle>
+                                <CardDescription className="text-sm">
+                                    {circuit.description}
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent className="pt-0">
+                                <div className="space-y-3">
                                     <div>
-                                        <h4 className="font-medium mb-2">Applications:</h4>
-                                        <div className="flex flex-wrap gap-2">
-                                            {circuit.applications.map((app, appIndex) => (
+                                        <h4 className="text-sm font-medium text-muted-foreground mb-1">Key Features</h4>
+                                        <div className="space-y-1">
+                                            {circuit.characteristics.slice(0, 2).map((char, index) => (
+                                                <p key={index} className="text-xs text-muted-foreground">
+                                                    • {char}
+                                                </p>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 className="text-sm font-medium text-muted-foreground mb-1">Applications</h4>
+                                        <div className="flex flex-wrap gap-1">
+                                            {circuit.applications.slice(0, 2).map((app, index) => (
                                                 <span
-                                                    key={appIndex}
-                                                    className="bg-primary/10 text-primary px-2 py-1 rounded-md text-xs"
+                                                    key={index}
+                                                    className="text-xs bg-muted px-2 py-1 rounded"
                                                 >
                                                     {app}
                                                 </span>
                                             ))}
+                                            {circuit.applications.length > 2 && (
+                                                <span className="text-xs text-muted-foreground">
+                                                    +{circuit.applications.length - 2} more
+                                                </span>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
-                            ))}
-                        </div>
-                    </div>
+                            </CardContent>
+                        </Card>
+                    </Link>
                 ))}
             </div>
 
             {/* Circuit Analysis Methods */}
-            <div className="mt-16 bg-muted/30 rounded-lg p-8">
+            <div className="bg-muted/30 rounded-lg p-8">
                 <div className="text-center mb-8">
                     <h2 className="text-3xl font-bold mb-4">Circuit Analysis Techniques</h2>
                     <p className="text-muted-foreground">
@@ -296,7 +263,7 @@ export default function CircuitsPage() {
                             <h3 className="font-semibold">AC Analysis</h3>
                         </div>
                         <ul className="space-y-1 text-sm text-muted-foreground">
-                            <li>• Phasor representation</li>
+                            <li>• Phasor analysis</li>
                             <li>• Impedance calculations</li>
                             <li>• Frequency response</li>
                             <li>• Resonance conditions</li>
@@ -309,7 +276,7 @@ export default function CircuitsPage() {
             <div className="flex justify-center gap-4 mt-12">
                 <Button asChild variant="outline">
                     <Link href="/components">
-                        ← Components
+                        ← Explore Components
                     </Link>
                 </Button>
                 <Button asChild variant="outline">

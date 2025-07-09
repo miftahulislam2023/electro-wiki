@@ -1,114 +1,86 @@
 import { Cpu, Zap, Gauge, Shield, Lightbulb, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
 export default function ComponentsPage() {
-    const componentCategories = [
+    const components = [
         {
-            title: "Passive Components",
+            id: "resistors",
+            name: "Resistors",
+            description: "Control current flow and voltage division in circuits",
+            category: "Passive Components",
             icon: <Gauge className="h-6 w-6" />,
-            description: "Components that don't actively control current flow",
-            components: [
-                {
-                    name: "Resistors",
-                    description: "Control current flow and voltage division",
-                    details: [
-                        "Fixed resistors - Carbon, metal film, wirewound",
-                        "Variable resistors - Potentiometers, rheostats",
-                        "Color code identification system",
-                        "Power ratings: 1/8W, 1/4W, 1/2W, 1W, 2W, 5W+"
-                    ]
-                },
-                {
-                    name: "Capacitors",
-                    description: "Store and release electrical energy",
-                    details: [
-                        "Electrolytic capacitors - High capacity, polarized",
-                        "Ceramic capacitors - Small values, non-polarized",
-                        "Film capacitors - Stable, precise values",
-                        "Tantalum capacitors - Compact, stable"
-                    ]
-                },
-                {
-                    name: "Inductors",
-                    description: "Store energy in magnetic fields",
-                    details: [
-                        "Air core inductors - High frequency applications",
-                        "Iron core inductors - Power applications",
-                        "Ferrite core inductors - RF applications",
-                        "Toroidal inductors - Low EMI"
-                    ]
-                }
-            ]
+            specs: "1/8W to 5W+, Carbon/Metal Film",
+            applications: ["Voltage dividers", "Current limiting", "Pull-up/down circuits"]
         },
         {
-            title: "Active Components",
+            id: "capacitors",
+            name: "Capacitors",
+            description: "Store and release electrical energy",
+            category: "Passive Components",
+            icon: <Gauge className="h-6 w-6" />,
+            specs: "pF to mF, Ceramic/Electrolytic/Film",
+            applications: ["Power supply filtering", "Timing circuits", "Coupling/decoupling"]
+        },
+        {
+            id: "inductors",
+            name: "Inductors",
+            description: "Store energy in magnetic fields",
+            category: "Passive Components",
+            icon: <Gauge className="h-6 w-6" />,
+            specs: "µH to H, Air/Iron/Ferrite core",
+            applications: ["Filters", "Transformers", "Energy storage"]
+        },
+        {
+            id: "transistors",
+            name: "Transistors",
+            description: "Amplify or switch electrical signals",
+            category: "Active Components",
             icon: <Cpu className="h-6 w-6" />,
-            description: "Components that actively control electrical signals",
-            components: [
-                {
-                    name: "Transistors",
-                    description: "Amplify or switch electrical signals",
-                    details: [
-                        "BJT (Bipolar Junction Transistors) - NPN and PNP types",
-                        "FET (Field Effect Transistors) - JFET and MOSFET",
-                        "Power transistors - High current/voltage applications",
-                        "Small signal transistors - Low power amplification"
-                    ]
-                },
-                {
-                    name: "Diodes",
-                    description: "Allow current flow in one direction",
-                    details: [
-                        "Silicon diodes - General purpose rectification",
-                        "Zener diodes - Voltage regulation",
-                        "LED (Light Emitting Diodes) - Light emission",
-                        "Schottky diodes - Fast switching, low voltage drop"
-                    ]
-                },
-                {
-                    name: "Integrated Circuits",
-                    description: "Complex circuits on a single chip",
-                    details: [
-                        "Operational Amplifiers - Signal amplification",
-                        "Microcontrollers - Programmable control",
-                        "Logic gates - Digital signal processing",
-                        "Voltage regulators - Power supply stabilization"
-                    ]
-                }
-            ]
+            specs: "BJT/FET, NPN/PNP, Small signal/Power",
+            applications: ["Amplifiers", "Switches", "Oscillators"]
         },
         {
-            title: "Protection Components",
+            id: "diodes",
+            name: "Diodes",
+            description: "Allow current flow in one direction",
+            category: "Active Components",
+            icon: <Cpu className="h-6 w-6" />,
+            specs: "Silicon/Schottky/Zener/LED",
+            applications: ["Rectification", "Voltage regulation", "Protection"]
+        },
+        {
+            id: "integrated-circuits",
+            name: "Integrated Circuits",
+            description: "Complex circuits on a single chip",
+            category: "Active Components",
+            icon: <Cpu className="h-6 w-6" />,
+            specs: "Op-amps, MCUs, Logic gates, Regulators",
+            applications: ["Signal processing", "Control systems", "Digital logic"]
+        },
+        {
+            id: "fuses",
+            name: "Fuses",
+            description: "Overcurrent protection devices",
+            category: "Protection Components",
             icon: <Shield className="h-6 w-6" />,
-            description: "Components that protect circuits from damage",
-            components: [
-                {
-                    name: "Fuses",
-                    description: "Overcurrent protection devices",
-                    details: [
-                        "Glass tube fuses - Visual indication of failure",
-                        "Ceramic fuses - High breaking capacity",
-                        "Blade fuses - Automotive applications",
-                        "Surface mount fuses - PCB applications"
-                    ]
-                },
-                {
-                    name: "Varistors",
-                    description: "Voltage surge protection",
-                    details: [
-                        "Metal Oxide Varistors (MOV) - AC line protection",
-                        "Silicon Carbide - High energy absorption",
-                        "Zinc Oxide - Fast response time",
-                        "Polymer varistors - Resettable protection"
-                    ]
-                }
-            ]
+            specs: "Glass/Ceramic/Blade, Various current ratings",
+            applications: ["Circuit protection", "Safety systems", "Automotive"]
+        },
+        {
+            id: "varistors",
+            name: "Varistors",
+            description: "Voltage surge protection",
+            category: "Protection Components",
+            icon: <Shield className="h-6 w-6" />,
+            specs: "MOV/SiC/ZnO, Various voltage ratings",
+            applications: ["Surge protection", "AC line protection", "Transient suppression"]
         }
     ];
 
     return (
-        <div className="container mx-auto px-20 py-8">
+        <div className="container mx-auto px-4 py-8">
             {/* Header */}
             <div className="text-center mb-12">
                 <div className="flex justify-center mb-4">
@@ -120,47 +92,69 @@ export default function ComponentsPage() {
                     Electronic Components
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                    Explore the building blocks of electronic circuits. From basic passive components
-                    to complex integrated circuits, understand their functions and applications.
+                    Explore the building blocks of electronic circuits. Click on any component
+                    to learn more about its properties, applications, and specifications.
                 </p>
             </div>
 
-            {/* Component Categories */}
-            <div className="space-y-12">
-                {componentCategories.map((category, categoryIndex) => (
-                    <div key={categoryIndex} className="bg-card rounded-lg border p-6">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="rounded-full bg-primary/10 p-2">
-                                {category.icon}
-                            </div>
-                            <div>
-                                <h2 className="text-2xl font-bold">{category.title}</h2>
-                                <p className="text-muted-foreground">{category.description}</p>
-                            </div>
-                        </div>
-
-                        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                            {category.components.map((component, componentIndex) => (
-                                <div key={componentIndex} className="bg-muted/20 rounded-lg p-4 border">
-                                    <h3 className="text-lg font-semibold mb-2">{component.name}</h3>
-                                    <p className="text-muted-foreground mb-3">{component.description}</p>
-                                    <ul className="space-y-1 text-sm">
-                                        {component.details.map((detail, detailIndex) => (
-                                            <li key={detailIndex} className="flex items-start gap-2">
-                                                <div className="rounded-full bg-primary/20 w-1.5 h-1.5 mt-2 flex-shrink-0" />
-                                                <span>{detail}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
+            {/* Components Grid */}
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-12">
+                {components.map((component) => (
+                    <Link
+                        key={component.id}
+                        href={`/components/${component.id}`}
+                        className="group block"
+                    >
+                        <Card className="h-full hover:shadow-lg transition-shadow duration-200 cursor-pointer border-2 group-hover:border-primary/50">
+                            <CardHeader className="pb-4">
+                                <div className="flex items-center gap-3 mb-2">
+                                    <div className="rounded-full bg-primary/10 p-2 group-hover:bg-primary/20 transition-colors">
+                                        {component.icon}
+                                    </div>
+                                    <div className="text-xs text-muted-foreground">
+                                        {component.category}
+                                    </div>
                                 </div>
-                            ))}
-                        </div>
-                    </div>
+                                <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                                    {component.name}
+                                </CardTitle>
+                                <CardDescription className="text-sm">
+                                    {component.description}
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent className="pt-0">
+                                <div className="space-y-3">
+                                    <div>
+                                        <h4 className="text-sm font-medium text-muted-foreground mb-1">Specifications</h4>
+                                        <p className="text-sm">{component.specs}</p>
+                                    </div>
+                                    <div>
+                                        <h4 className="text-sm font-medium text-muted-foreground mb-1">Applications</h4>
+                                        <div className="flex flex-wrap gap-1">
+                                            {component.applications.slice(0, 2).map((app, index) => (
+                                                <span
+                                                    key={index}
+                                                    className="text-xs bg-muted px-2 py-1 rounded"
+                                                >
+                                                    {app}
+                                                </span>
+                                            ))}
+                                            {component.applications.length > 2 && (
+                                                <span className="text-xs text-muted-foreground">
+                                                    +{component.applications.length - 2} more
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </Link>
                 ))}
             </div>
 
             {/* Quick Reference */}
-            <div className="mt-16 bg-muted/30 rounded-lg p-8">
+            <div className="bg-muted/30 rounded-lg p-8">
                 <div className="text-center mb-8">
                     <h2 className="text-3xl font-bold mb-4">Component Selection Guide</h2>
                     <p className="text-muted-foreground">
