@@ -48,33 +48,33 @@ export default function ElectroWiki() {
               </div>
             </div>
             <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mt-8">
-              <div className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-sm">
-                <div className="rounded-full bg-primary/10 p-3">
+              <Link href="/components" className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-sm hover:shadow-md transition-shadow duration-200 group">
+                <div className="rounded-full bg-primary/10 p-3 group-hover:bg-primary/20 transition-colors duration-200">
                   <Cpu className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold">Components</h3>
+                <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-200">Components</h3>
                 <p className="text-center text-muted-foreground">
                   Detailed information about electronic components and their applications.
                 </p>
-              </div>
-              <div className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-sm">
-                <div className="rounded-full bg-primary/10 p-3">
+              </Link>
+              <Link href="/circuits" className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-sm hover:shadow-md transition-shadow duration-200 group">
+                <div className="rounded-full bg-primary/10 p-3 group-hover:bg-primary/20 transition-colors duration-200">
                   <Zap className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold">Circuits</h3>
+                <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-200">Circuits</h3>
                 <p className="text-center text-muted-foreground">
                   Explore circuit designs with detailed explanations and diagrams.
                 </p>
-              </div>
-              <div className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-sm">
-                <div className="rounded-full bg-primary/10 p-3">
+              </Link>
+              <Link href="/concepts" className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-sm hover:shadow-md transition-shadow duration-200 group">
+                <div className="rounded-full bg-primary/10 p-3 group-hover:bg-primary/20 transition-colors duration-200">
                   <Lightbulb className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold">Concepts</h3>
+                <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-200">Concepts</h3>
                 <p className="text-center text-muted-foreground">
                   Learn fundamental electrical and electronics concepts and theories.
                 </p>
-              </div>
+              </Link>
             </div>
           </div>
         </section>

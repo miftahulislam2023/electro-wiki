@@ -10,7 +10,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { BookOpen, Settings, User, Zap } from "lucide-react";
+import { Settings, User, Zap, Cpu, Lightbulb } from "lucide-react";
+import Link from "next/link";
 
 export default async function Navbar() {
     const session = await auth()
@@ -28,15 +29,31 @@ export default async function Navbar() {
         <nav className="mx-5 sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container flex h-16 max-w-screen-2xl items-center">
                 <div className="mr-6 flex items-center space-x-2">
-                    <Zap className="h-6 w-6 text-primary" />
-                    <span className="hidden font-bold sm:inline-block">
-                        ElectroWiki
-                    </span>
+                    <Link href="/" className="flex items-center space-x-2">
+                        <Zap className="h-6 w-6 text-primary" />
+                        <span className="hidden font-bold sm:inline-block">
+                            ElectroWiki
+                        </span>
+                    </Link>
                 </div>
-                <div className="mr-4 hidden md:flex">
-                    <Button variant="ghost" size="sm" className="gap-2">
-                        <BookOpen className="h-4 w-4" />
-                        Wiki
+                <div className="mr-4 hidden md:flex space-x-2">
+                    <Button variant="ghost" size="sm" asChild>
+                        <Link href="/components" className="gap-2">
+                            <Cpu className="h-4 w-4" />
+                            Components
+                        </Link>
+                    </Button>
+                    <Button variant="ghost" size="sm" asChild>
+                        <Link href="/circuits" className="gap-2">
+                            <Zap className="h-4 w-4" />
+                            Circuits
+                        </Link>
+                    </Button>
+                    <Button variant="ghost" size="sm" asChild>
+                        <Link href="/concepts" className="gap-2">
+                            <Lightbulb className="h-4 w-4" />
+                            Concepts
+                        </Link>
                     </Button>
                 </div>
                 <div className="flex flex-1 items-center justify-end space-x-4">
