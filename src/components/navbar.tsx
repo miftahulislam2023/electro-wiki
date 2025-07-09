@@ -60,7 +60,7 @@ export default async function Navbar() {
                     {session?.user ? (
                         <div className="flex items-center gap-2">
                             <span className="hidden text-sm text-muted-foreground md:inline-block">
-                                Welcome back!
+                                Welcome back! {session.user.name}
                             </span>
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
