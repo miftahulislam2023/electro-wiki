@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import SignIn from "./sign-in";
 import SignOut from "./sign-out";
 import { Button } from "./ui/button";
+import { ThemeToggle } from "./theme-toggle";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -63,6 +64,7 @@ export default async function Navbar() {
                     </Button>
                 </div>
                 <div className="flex flex-1 items-center justify-end space-x-4">
+                    <ThemeToggle />
                     {session?.user ? (
                         <div className="flex items-center gap-2">
                             <span className="hidden text-sm text-muted-foreground md:inline-block">
